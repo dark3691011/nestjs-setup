@@ -1,0 +1,18 @@
+DISABLED_APM=false
+ELASTIC_APM_SERVER_URL=https://f15cebb79ecc4364abe8a870ec19fb79.apm.us-central1.gcp.cloud.es.io
+ELASTIC_APM_SECRET_TOKEN="QmxDU2NKTUJ5emxHaXNGN2lLVGk6TjlUZXB6RGxRT3VoUkZoUmM2UV9wQQ=="
+ELASTIC_APM_SERVER_NAME=apm-test
+ELASTIC_APM_ENV=development
+
+
+ES_LOG_NODE=https://elk-lc.frt.vn
+ES_LOG_PREFIX=logs-ci-vaccine-rsa-ecom
+ES_LOG_LEVEL=info
+ES_LOG_USER=logs-dev
+ES_LOG_PASSWORD=tngQYFoEO5gWTsprDMNL
+NODE_ENV=CI
+
+
+
+ES_NODE = "https://56fbf5b2c6974ef99db60728086cc223.us-central1.gcp.cloud.es.io:443"
+ES_API_KEY="QTFEV1RKTUJ5emxHaXNGN1ZLUzg6V3I5cDhNeGVRdkt3bHQ1MG5aenZSZw=="
