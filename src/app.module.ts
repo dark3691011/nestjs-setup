@@ -2,16 +2,22 @@ import { Module } from "@nestjs/common";
 import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
 import { MultiElasticsearchModule } from "./modules/elasticsearch/multi-elasticsearch.module";
+import "dotenv/config";
+import { WinstonModule } from "nest-winston";
+import { WinstonLoggerConfigService } from "./config/logger.config";
 
 @Module({
   imports: [
+    WinstonModule.forRootAsync({
+      useClass: WinstonLoggerConfigService,
+    }),
     MultiElasticsearchModule.register([
       {
         name: "cluster1",
         options: {
-          node: "https://56fbf5b2c6974ef99db60728086cc223.us-central1.gcp.cloud.es.io:443",
+          node: process.env.ES_NODE,
           auth: {
-            apiKey: `QTFEV1RKTUJ5emxHaXNGN1ZLUzg6V3I5cDhNeGVRdkt3bHQ1MG5aenZSZw==`,
+            apiKey: process.env.ES_API_KEY,
           },
         },
       },
