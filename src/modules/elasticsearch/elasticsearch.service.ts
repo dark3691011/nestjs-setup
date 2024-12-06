@@ -1,5 +1,6 @@
 import { Injectable, Inject } from "@nestjs/common";
 import { Client } from "@elastic/elasticsearch";
+import { checkIndex } from "src/mapping";
 
 @Injectable()
 export class ElasticsearchService {
@@ -7,6 +8,12 @@ export class ElasticsearchService {
     @Inject("ES_CLIENT_CLUSTER1") private readonly cluster1Client: Client,
     @Inject("ES_CLIENT_CLUSTER2") private readonly cluster2Client: Client
   ) {}
+
+  async onModuleInit() {
+    const indexName = "my_index";
+
+    await checkIndex(this.cluster1Client, indexName);
+  }
 
   async searchCluster1(index: string, query: any) {
     await this.cluster1Client.index({
