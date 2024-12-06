@@ -16,17 +16,16 @@ export const LOG_LEVEL = {
   VERBOSE: "verbose",
 };
 
-const apmAgent =
-  process.env.ES_LOG_DISABLED !== "true"
-    ? apm.start({
-        serverUrl: process.env.ELASTIC_APM_SERVER_URL,
-        secretToken: process.env.ELASTIC_APM_SECRET_TOKEN,
-        serviceName: process.env.ELASTIC_APM_SERVER_NAME,
-        usePathAsTransactionName: true,
-        centralConfig: false,
-        environment: process.env.ELASTIC_APM_ENV,
-      })
-    : null;
+const apmAgent = !apm.isStarted()
+  ? apm.start({
+      serverUrl: process.env.ELASTIC_APM_SERVER_URL,
+      secretToken: process.env.ELASTIC_APM_SECRET_TOKEN,
+      serviceName: process.env.ELASTIC_APM_SERVER_NAME,
+      usePathAsTransactionName: true,
+      centralConfig: false,
+      environment: process.env.ELASTIC_APM_ENV,
+    })
+  : null;
 @Injectable()
 export class WinstonLoggerConfigService implements WinstonModuleOptionsFactory {
   async createWinstonModuleOptions(): Promise<WinstonModuleOptions> {

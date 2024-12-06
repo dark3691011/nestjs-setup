@@ -14,14 +14,21 @@ export class ElasticsearchService {
       body: {
         name: 123,
         age: 3,
+        message1: query,
       },
       refresh: true,
       id: `1`,
     });
-    return this.cluster1Client.search({
+    let a = {
+      query: {
+        match: { message1: query },
+      },
+    };
+    const res = await this.cluster1Client.search({
       index,
-      body: query,
+      body: a,
     });
+    return res;
   }
 
   async searchCluster2(index: string, query: any) {

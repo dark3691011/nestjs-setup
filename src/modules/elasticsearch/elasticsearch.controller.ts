@@ -7,11 +7,7 @@ export class ElasticsearchController {
 
   @Get("cluster1")
   async searchCluster1(@Query("query") query: string) {
-    return this.elasticService.searchCluster1("my-index", {
-      query: {
-        match: { message: query },
-      },
-    });
+    return this.elasticService.searchCluster1("my-index", query);
   }
 
   @Get("cluster2")

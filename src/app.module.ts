@@ -5,6 +5,9 @@ import { MultiElasticsearchModule } from "./modules/elasticsearch/multi-elastics
 import "dotenv/config";
 import { WinstonModule } from "nest-winston";
 import { WinstonLoggerConfigService } from "./config/logger.config";
+import { APP_FILTER, APP_INTERCEPTOR } from "@nestjs/core";
+import { LoggingInterceptor } from "./intercepters/logging.interceptor";
+import { AllExceptionsFilter } from "./filters/all-exception.filter";
 
 @Module({
   imports: [
@@ -34,6 +37,16 @@ import { WinstonLoggerConfigService } from "./config/logger.config";
     ]),
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: LoggingInterceptor,
+    },
+    {
+      provide: APP_FILTER,
+      useClass: AllExceptionsFilter,
+    },
+  ],
 })
 export class AppModule {}
